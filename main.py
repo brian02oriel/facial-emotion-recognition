@@ -11,6 +11,11 @@ cap = cv2.VideoCapture(0)
 while True:
     ret, frame = cap.read()
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    if not ret:
+        print("Error reading frame")
+        break
+    # Display the original and individual channels
+    cv2.imshow('Gray', gray_frame)
     faces = face_cascade.detectMultiScale(gray_frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
     for (x, y, w, h) in faces:
         face_roi = gray_frame[y:y + h, x:x + w]
